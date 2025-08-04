@@ -225,7 +225,7 @@ The API provides clear error responses:
 
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the [MIT License](https://github.com/Saatwik-Mehta/flask-url-shortner/blob/400b81dd68518e3d7baa31de7a854c89f197cc60/LICENSE).
 
 
 ---
