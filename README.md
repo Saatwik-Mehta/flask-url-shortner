@@ -23,7 +23,7 @@ A powerful and simple URL shortener API built with Flask, featuring full CRUD op
 
 1. **Clone and navigate to the project**:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Saatwik-Mehta/flask-url-shortner.git
    cd flask-url-shortener
    ```
 
