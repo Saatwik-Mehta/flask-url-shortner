@@ -1,0 +1,138 @@
+swagger: "2.0"
+info:
+  title: Flask URL Shortener API
+  description: A simple API-based URL shortener with CRUD operations.
+  version: "1.0.0"
+host: "127.0.0.1:5000"
+basePath: "/"
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+
+  /shorten:
+    post:
+      summary: Create a shortened URL
+      operationId: createShortURL
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                example: "https://www.google.com"
+      responses:
+        201:
+          description: Short URL created
+          schema:
+            type: object
+            properties:
+              short_url:
+                type: string
+        400:
+          description: Invalid input
+
+  /expand/{short_code}:
+    get:
+      summary: Get original URL and metadata
+      operationId: expandShortURL
+      parameters:
+        - name: short_code
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: Original URL and info
+          schema:
+            type: object
+            properties:
+              original_url:
+                type: string
+              created_at:
+                type: string
+        404:
+          description: Short URL not found
+
+  /update/{short_code}:
+    put:
+      summary: Update original URL for a short code
+      operationId: updateShortURL
+      parameters:
+        - name: short_code
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              url:
+                type: string
+                example: "https://www.example.com"
+      responses:
+        200:
+          description: Successfully updated
+        400:
+          description: Invalid input
+        404:
+          description: Short URL not found
+
+  /delete/{short_code}:
+    delete:
+      summary: Delete a shortened URL
+      operationId: deleteShortURL
+      parameters:
+        - name: short_code
+          in: path
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successfully deleted
+        404:
+          description: Short URL not found
+
+  /r/{short_code}:
+    get:
+      summary: Redirect to original URL
+      operationId: redirectShortUrl
+      parameters:
+        - name: short_code
+          in: path
+          required: true
+          type: string
+      responses:
+        302:
+          description: Redirects to the original URL
+        404:
+          description: Short URL not found
+
+  /urls:
+    get:
+      summary: List all shortened URLs
+      operationId: allShortUrls
+      responses:
+        200:
+          description: List of URLs
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                short_code:
+                  type: string
+                short_url:
+                  type: string
+                original_url:
+                  type: string
+                created_at:
+                  type: string
